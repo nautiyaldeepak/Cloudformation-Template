@@ -1,0 +1,45 @@
+# Template to Launch RDS Instance
+
+Description: > This template is to launch RDS Instance
+
+Parameters:
+  DataBaseInstanceClass:
+    Description: "Instances Size"
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.nano
+      - t2.micro
+      - t2.small
+      - t2.large
+  DiskStorage:
+    Description: "Database Storage Disk"
+    Type: String
+    Default: 20
+  AutoVersionUpgrade:
+    Description: "Enable Auto Version Upgrade"
+    Type: Boolean
+    Default: True
+    AllowedValues:
+      - True
+      - False
+  MultiAZs:
+    Description: "Enable Multi AZ Deployment"
+    Type: Boolean
+    Default: True
+    AllowedValues:
+      - True
+      - False
+  BackUpRetentionPeriod:
+    Description: "Snapshot Retention Period after Database is deleted"
+    Type: String
+    Default: 30
+  DatabaseName:
+    Description: "Name of the Database"
+    Type: String
+
+
+Resources:
+  MyRDSInstance:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
