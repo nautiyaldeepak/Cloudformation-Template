@@ -3,7 +3,7 @@
 Description: > This template is to launch RDS Instance
 
 Parameters:
-  DataBaseInstanceClass:
+  DatabaseInstanceClass:
     Description: "Instances Size"
     Type: String
     Default: t2.micro
@@ -42,15 +42,41 @@ Parameters:
       - True
       - False
   BackUpRetentionPeriod:
-    Description: "Snapshot Retention Period after Database is deleted"
+    Description: "Automated Snapshot Retention Period after Database is deleted"
     Type: String
     Default: 30
   DatabaseName:
     Description: "Name of the Database"
     Type: String
+  SnapshotTags:
+    Description: Copy DB Instance tags to Snapshots
+    Type: Boolean
+    Default: True
+    AllowedValues:
+      - True
+      - False
+    RDSParameterGroups:
+      Description: "Select Parameter Group"
+      Type: AWS::RDS::DBParameterGroup
+    RDSSecurityGroup:
+      Description: "Select Security group"
+      Type: AWS::RDS::DBSecurityGroup
+    SnapshotName:
+      Description: "Name for Snapshots for this DB"
+      Type: String
 
 
 Resources:
   MyRDSInstance:
     Type: "AWS::RDS::DBInstance"
     Properties:
+      AllocatedStorage: !Ref DiskStorage
+      AllowMajorVersionUpgrade: !Ref AutoVersionUpgrade
+      AllowMinorVersionUpgrade: !Ref AutoVersionUpgrade
+      BackupRetentionPeriod: !Ref BackUpRetentionPeriod
+      CopyTagsToSnapshot: !Ref SnapshotTags
+      DBInstanceClass: !Ref DatabaseInstanceClass
+      DBName: !Ref DatabaseName
+      DBParameterGroupName: !Ref RDSParameterGroups
+      DBSecurityGroups: !Ref RDSSecurityGroup
+      DBSnapshotIdentifier: !Ref SnapshotName
