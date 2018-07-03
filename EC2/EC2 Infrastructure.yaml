@@ -2,7 +2,7 @@
 # AWSTemplateFormatVersion: "2018-30-05"
 
 Description: >
-  Test Template DeepakNautiyal
+  Template to launch higly available fault tolerant EC2 infrastructure.
 
 Parameters:
   InstanceType:
