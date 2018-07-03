@@ -1,0 +1,32 @@
+---
+# AWSTemplateFormatVersion: "2018-30-05"
+
+Description: >
+  Template to launch load balancer
+
+Resources:
+  # Create an EC2 load balancer
+  MyLoadBalancer:
+    Type: "AWS::ElasticLoadBalancing::LoadBalancer"
+    Properties:
+      Subnets: # Enter Subnets Here
+      SecurityGroups:
+        # Security Group List
+        # Security Group List
+      Listeners:
+        - LoadBalancerPort: "80"
+          InstancePort: "80"
+          Protocol: HTTP
+      HealthCheck:
+          Target: "HTTP:80/index.html"
+          HealthyThreshold: "3"
+          UnhealthyThreshold: "4"
+          Interval: "5"
+          Timeout: "3"
+      Tags:
+        -
+          Key: "Enter Key Here"
+          Value: "Enter Value"
+        -
+          Key: "Enter Key Here"
+          Value: "Enter Value"
