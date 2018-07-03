@@ -3,14 +3,18 @@
 
 Description: >
   Template to create EC2 Security Groups
-Resources:
 
+Parameters:
+  MyVPC:
+    Description: Select VPC
+    Type: AWS::EC2::VPC::Id
+Resources:
   # Creating Security Group for outgoing traffic
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Test Security group (Egress)"
-      VpcId: # Enter VPC Id
+      VpcId: !Ref MyVPC   # Can also hard code the vpc Id
       SecurityGroupEgress:
         - IpProtocol: tcp
           FromPort: "22"
@@ -37,7 +41,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Test Security Group (Ingress)"
-      VpcId: #  Enter VPC Id
+      VpcId: !Ref MyVPC    # Can also hard code the vpc Id
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: "22"
