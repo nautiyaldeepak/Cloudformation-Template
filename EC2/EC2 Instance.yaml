@@ -23,13 +23,6 @@ Parameters:
       - m3.2xlarge
       - c1.medium
       - c1.xlarge
-  Department:
-    Description: "Name Of the Department"
-    Type: String 
-    Default: Production
-    AllowedValues:
-      - Developemnt
-      - Testing
   MyVPC:
     Description: Select VPC
     Type: AWS::EC2::VPC::Id
@@ -108,9 +101,6 @@ Resources:
         -
           Key: "username"
           Value: "DeepakNautiyal"
-        -
-          Key: "Department"
-          Value: !Ref Department
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
