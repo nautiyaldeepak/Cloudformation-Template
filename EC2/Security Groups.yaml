@@ -10,7 +10,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Test Security group (Egress)"
-      VpcId: !Ref VPC
+      VpcId: # Enter VPC Id
       SecurityGroupEgress:
         - IpProtocol: tcp
           FromPort: "22"
@@ -37,7 +37,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Test Security Group (Ingress)"
-      VpcId: !Ref VPC
+      VpcId: #  Enter VPC Id
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: "22"
