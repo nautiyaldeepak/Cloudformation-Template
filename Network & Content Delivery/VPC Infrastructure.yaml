@@ -1,0 +1,37 @@
+Parameters:
+  DnsSupport:
+    Description: "Enable DNS Support"
+    Type: String
+    Default: true
+    AllowedValues:
+      - true
+      - false
+  DnsHostName:
+    Description: "Enable DNS Host Name"
+    Type: String
+    Default: false
+    AllowedValues:
+      - true
+      - false
+  TenancyForInstance:
+    Description:  "Select Instance Tenancy"
+    Type: String
+    Default: default
+    AllowedValues:
+      - default
+      - dedicated
+  VPCCidrBlock:
+    Description: "Enter Cidr Block for VPC"
+    Type: String
+Resources:
+  MyVPC:
+    Type: "AWS::EC2::VPC"
+    Properties: 
+      CidrBlock: !Ref VPCCidrBlock            # String
+      EnableDnsSupport: !Ref DnsSupport       # Boolean
+      EnableDnsHostnames: !Ref DnsHostName    # Boolean
+      InstanceTenancy: !Ref TenancyForInstance
+      Tags:
+        - 
+          Key: "Enter Key Here"
+          Value: "Enter Value Here"
