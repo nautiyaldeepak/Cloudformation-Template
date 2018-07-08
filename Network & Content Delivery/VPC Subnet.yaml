@@ -1,0 +1,15 @@
+MySubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AssignIpv6AddressOnCreation: !Ref GenerateIpv6AddressForSubnet
+      AvailabilityZone: !Select 
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+      CidrBlock: !Ref CidrBlockForSubnet
+      Ipv6CidrBlock: !Ref Ipv6CidrForSubnet
+      MapPublicIpOnLaunch: !Ref MapPublicIpForSubnet
+      VpcId: MyVPC
+      Tags:
+        - 
+          Key: "Enter Key Here"
+          Value: "Enter Value Here"
