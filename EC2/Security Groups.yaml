@@ -3,6 +3,8 @@
 
 Description: >
   Template to create EC2 Security Groups
+  Ingress & Egress Security Groups
+
 
 Parameters:
   MyVPC:
