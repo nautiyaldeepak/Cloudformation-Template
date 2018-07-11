@@ -3,6 +3,10 @@
 
 Description: >
   Template to launch load balancer
+ Parameters:
+  SecurityGroups:
+    Description: "Select Security Group from list"
+    Type: "AWS::EC2::SecurityGroups"
 
 Resources:
   # Create an EC2 load balancer
