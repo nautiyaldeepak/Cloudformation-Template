@@ -34,10 +34,6 @@ Resources:
         -
           Key: "Enter Key Value"
           Value: "Enter Value"
-        -
-          Key: "Enter Key Value"
-          Value: "Enter Value"
-
   # Creating Security Group for incoming traffic
   MySecurityGroupIngress:
     Type: AWS::EC2::SecurityGroup
@@ -58,9 +54,6 @@ Resources:
           ToPort: "443"
           CidrIp: 0.0.0.0/0
       Tags:
-        -
-          Key: "Enter Key Value"
-          Value: "Enter Value"
         -
           Key: "Enter Key Value"
           Value: "Enter Value"
