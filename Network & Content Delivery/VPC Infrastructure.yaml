@@ -70,3 +70,6 @@ Resources:
         - 
           Key: "Enter Key Here"
           Value: "Enter Value Here"
+  InternetGateway:
+    Type: "AWS::EC2::VPC::InternetGateway"
+    Properties:
