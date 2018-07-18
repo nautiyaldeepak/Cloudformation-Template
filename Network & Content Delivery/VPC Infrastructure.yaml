@@ -1,3 +1,10 @@
+---
+# AWSTemplateFormatVersion: "2018-30-05"
+
+Description: >
+  Template to launch VPC Infrastructure
+
+
 Parameters:
   DnsSupport:
     Description: "Enable DNS Support"
@@ -23,26 +30,12 @@ Parameters:
   VPCCidrBlock:
     Description: "Enter Cidr Block for VPC"
     Type: String
-  GenerateIpv6AddressForSubnet:
-    Description: "Create Ipv6 Address for Subnet"
-    Type: String
-    Default: false
-    AllowedValues:
-      - true
-      - false
-  CidrBlockForSubnet:
+  CidrBlockForSubnetPublic:
     Description: "Cidr Ip for Subnet"
     Type: String
-  Ipv6CidrForSubnet:
-    Description: "Ipv6 Cidr for Subnet. {Enter only if GenerateIpv6AddressforSubnet is 'true'}"
+  CidrBlockForSubnetPrivate:
+    Description: "Cidr Ip for Subnet"
     Type: String
-  MapPublicIpForSubnet:
-    Description: "Instances Launched in this subnet should have a public IP"
-    Type: String
-    Default: true
-    AllowedValues:
-      - true
-      - false
 Resources:
   MyVPC:
     Type: "AWS::EC2::VPC"
@@ -55,21 +48,38 @@ Resources:
         - 
           Key: "Enter Key Here"
           Value: "Enter Value Here"
-  MySubnet:
+  MySubnetPublic:
     Type: "AWS::EC2::Subnet"
     Properties:
-      AssignIpv6AddressOnCreation: !Ref GenerateIpv6AddressForSubnet
       AvailabilityZone: !Select 
         - 0
         - Fn::GetAZs: !Ref 'AWS::Region'
-      CidrBlock: !Ref CidrBlockForSubnet
-      Ipv6CidrBlock: !Ref Ipv6CidrForSubnet
-      MapPublicIpOnLaunch: !Ref MapPublicIpForSubnet
-      VpcId: MyVPC
+      CidrBlock: !Ref CidrBlockForSubnetPublic
+      MapPublicIpOnLaunch: "true"
+      VpcId: 
+        Ref: MyVPC
       Tags:
         - 
           Key: "Enter Key Here"
           Value: "Enter Value Here"
-  InternetGateway:
-    Type: "AWS::EC2::VPC::InternetGateway"
+  MySubnetPrivate:
+    Type: "AWS::EC2::Subnet"
     Properties:
+      AvailabilityZone: !Select 
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+      CidrBlock: !Ref CidrBlockForSubnetPrivate
+      MapPublicIpOnLaunch: "false"
+      VpcId: 
+        Ref: MyVPC
+      Tags:
+        - 
+          Key: "Enter Key Here"
+          Value: "Enter Value Here"
+  MyInternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+        -
+          Key: "Enter Key Here"
+          Value: "Enter Value Here"
