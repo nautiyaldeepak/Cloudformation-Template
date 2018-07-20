@@ -2,13 +2,15 @@
 
 # This Template uses Amazon Linux AMI
 
-Description: > Write EC2 Instance Logs to CloudWatch
-Paramters:
+Description: > 
+  Write EC2 Instance Logs to CloudWatch
+
+Parameters:
   InstanceType:
     Description: Select Instance Type
     Type: String
     Default: t2.micro
-    AllowedValue:
+    AllowedValues:
       - t2.nano
       - t2.micro
       - t2.small
@@ -29,7 +31,7 @@ Paramters:
     Type: String
   KeyName: 
     Description: Key Pair to ssh into Instance
-    Type: AWS::EC2::Keypair::KeyName
+    Type: AWS::EC2::KeyPair::KeyName
   MyVPC:
     Description: Select VPC
     Type: AWS::EC2::VPC::Id
@@ -60,8 +62,13 @@ Resources:
           Fn::Join:
           - "\n"
           - - "#!/bin/bash -v"
-            - "yum install awslogs"
-
+            - "sudo yum install awslogs -y"
+            - "sudo rm -rf /etc/awslogs/awscli.conf"
+            - "sudo rm -rf /etc/awslogs/awslogs.conf"
+            - "sudo echo -e '[plugins]\ncwlogs = cwlogs\n[default]\nregion = ap-south-1' > /etc/awslogs/awscli.conf"
+            - "sudo echo -e '[general]\nstate_file = /var/lib/awslogs/agent-state\n' > /etc/awslogs/awslogs.conf"
+            - "sudo echo -e '[/var/log/cloud-init]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init' >> /etc/awslogs/awslogs.conf"
+            - "sudo service awslogs start"
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
