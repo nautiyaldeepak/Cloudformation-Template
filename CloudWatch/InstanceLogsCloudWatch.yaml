@@ -35,6 +35,10 @@ Parameters:
   MyVPC:
     Description: Select VPC
     Type: AWS::EC2::VPC::Id
+  IamRole:
+    Description: Role Name
+    Type: String
+    Default: cloudwatch
 
 Mappings:
   RegionMap:
@@ -48,12 +52,19 @@ Mappings:
       amazonLinux: "ami-92df37ed"
 
 Resources:
+  CloudWatchInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+      - {Ref: IamRole} 
   LinuxInstance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", amazonLinux]
       InstanceType: !Ref InstanceType
       KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref CloudWatchInstanceProfile
       SecurityGroupIds:
         - Ref: MySecurityGroupIngress
         - Ref: MySecurityGroupEgress
