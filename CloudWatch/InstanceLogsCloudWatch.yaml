@@ -44,12 +44,16 @@ Mappings:
   RegionMap:
     us-east-1:
       amazonLinux: "ami-14c5486b"
+      regionCode: us-east-1
     us-east-2:
       amazonLinux: "ami-922914f7"
+      regionCode: us-east-2
     ap-south-1:
       amazonLinux: "ami-76d6f519"
+      regionCode: ap-south-1
     ap-northeast-1:
       amazonLinux: "ami-92df37ed"
+      regionCode: ap-northeast-1
 
 Resources:
   CloudWatchInstanceProfile: 
@@ -78,7 +82,9 @@ Resources:
             - "sudo rm -rf /etc/awslogs/awslogs.conf"
             - "sudo echo -e '[plugins]\ncwlogs = cwlogs\n[default]\nregion = ap-south-1' > /etc/awslogs/awscli.conf"
             - "sudo echo -e '[general]\nstate_file = /var/lib/awslogs/agent-state\n' > /etc/awslogs/awslogs.conf"
-            - "sudo echo -e '[/var/log/cloud-init]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init' >> /etc/awslogs/awslogs.conf"
+            - "sudo echo -e '[/var/log/cloud-init]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init\n' >> /etc/awslogs/awslogs.conf"
+            - "sudo echo -e '[/var/log/yum-log]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/yum.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/yum\n' >> /etc/awslogs/awslogs.conf"
+            - "sudo echo -e '[/var/log/cloud-init-output]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init-output.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init-output\n' >> /etc/awslogs/awslogs.conf"
             - "sudo service awslogs start"
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
