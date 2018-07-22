@@ -86,6 +86,10 @@ Resources:
             - "sudo echo -e '[/var/log/yum-log]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/yum.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/yum\n' >> /etc/awslogs/awslogs.conf"
             - "sudo echo -e '[/var/log/cloud-init-output]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init-output.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init-output\n' >> /etc/awslogs/awslogs.conf"
             - "sudo service awslogs start"
+      Tags:
+        -
+          Key: Name
+          Value: !Ref InstanceName
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
