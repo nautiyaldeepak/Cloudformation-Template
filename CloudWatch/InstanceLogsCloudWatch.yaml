@@ -78,8 +78,6 @@ Resources:
           - "\n"
           - - "#!/bin/bash -v"
             - "sudo yum install awslogs -y"
-            - "sudo rm -rf /etc/awslogs/awscli.conf"
-            - "sudo rm -rf /etc/awslogs/awslogs.conf"
             - "sudo echo -e '[plugins]\ncwlogs = cwlogs\n[default]\nregion = ap-south-1' > /etc/awslogs/awscli.conf"
             - "sudo echo -e '[general]\nstate_file = /var/lib/awslogs/agent-state\n' > /etc/awslogs/awslogs.conf"
             - "sudo echo -e '[/var/log/cloud-init]\ndatetime_format = %b %d %H:%M:%S\nfile = /var/log/cloud-init.log\nbuffer_duration = 5000\nlog_stream_name = {instance_id}\ninitial_position = start_of_file\nlog_group_name = /var/log/cloud-init\n' >> /etc/awslogs/awslogs.conf"
@@ -134,4 +132,3 @@ Resources:
         -
           Key: "Name"
           Value: "IngressSecurity"
-
