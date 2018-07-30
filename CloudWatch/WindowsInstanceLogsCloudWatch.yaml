@@ -72,4 +72,6 @@ Resources:
         Fn::Base64:
           Fn::Join:
           - "\n"
-          - - "#!/bin/bash -v" 
+          - - "#!/bin/bash -v"
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack ' 
