@@ -81,9 +81,9 @@ Resources:
       GroupDescription: "Test Security group (Egress)"
       VpcId: !Ref MyVPC
       SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+        - IpProtocol: rdp
+          FromPort: "3389"
+          ToPort: "3389"
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: "80"
@@ -103,9 +103,9 @@ Resources:
       GroupDescription: "Test Security Group (Ingress)"
       VpcId: !Ref MyVPC
       SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+        - IpProtocol: rdp
+          FromPort: "3389"
+          ToPort: "3389"
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: "80"
