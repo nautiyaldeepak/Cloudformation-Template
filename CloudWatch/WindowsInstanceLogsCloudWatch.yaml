@@ -71,9 +71,9 @@ Resources:
       UserData:
         Fn::Base64:
           Fn::Join:
-          - "\n"
-          - - "#!/bin/bash -v"
-            - '/opt/aws/bin/cfn-init -v '
+          - " "
+          - - "powershell.exe expand-archive c:\cloud.zip c:\amazonAgent"
+            - "powershell.exe c:\amazonAgent\install.ps1"
             - '         --stack ' 
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
@@ -81,9 +81,9 @@ Resources:
       GroupDescription: "Test Security group (Egress)"
       VpcId: !Ref MyVPC
       SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+        - IpProtocol: rdp
+          FromPort: "3389"
+          ToPort: "3389"
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: "80"
@@ -103,9 +103,9 @@ Resources:
       GroupDescription: "Test Security Group (Ingress)"
       VpcId: !Ref MyVPC
       SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+        - IpProtocol: rdp
+          FromPort: "3389"
+          ToPort: "3389"
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: "80"
