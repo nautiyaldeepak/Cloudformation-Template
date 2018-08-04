@@ -9,9 +9,9 @@
                                                 "log_stream_name": "cloud-init"
                                         },
                                         {
-                                                "file_path": "/var/log/yum.log",
+                                                "file_path": "/var/log/cloud-init-cmd.log",
                                                 "log_group_name": "{instance_id}",
-                                                "log_stream_name": "yum"
+                                                "log_stream_name": "cloud-init-cmd"
                                         }
                                 ]
                         }
