@@ -4,12 +4,12 @@
                         "files": {
                                 "collect_list": [
                                         {
-                                                "file_path": "windwos log file path",
+                                                "file_path": "C:\\Windows\\Logs\\CBS\\CBS.log",
                                                 "log_group_name": "{instance_id}",
                                                 "log_stream_name": "cloud-init"
                                         },
                                         {
-                                                "file_path": "windows log file path",
+                                                "file_path": "C:\\Windows\\Logs\\DISM\\dism.log",
                                                 "log_group_name": "{instance_id}",
                                                 "log_stream_name": "yum"
                                         }
