@@ -6,12 +6,12 @@
                                         {
                                                 "file_path": "C:\\Windows\\Logs\\CBS\\CBS.log",
                                                 "log_group_name": "{instance_id}",
-                                                "log_stream_name": "cloud-init"
+                                                "log_stream_name": "cbs.log"
                                         },
                                         {
                                                 "file_path": "C:\\Windows\\Logs\\DISM\\dism.log",
                                                 "log_group_name": "{instance_id}",
-                                                "log_stream_name": "yum"
+                                                "log_stream_name": "dism.log"
                                         }
                                 ]
                         }
