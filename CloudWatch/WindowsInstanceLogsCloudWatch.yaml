@@ -72,9 +72,9 @@ Resources:
         Fn::Base64:
           Fn::Join:
           - " "
-          - - "powershell.exe expand-archive c:\cloud.zip c:\amazonAgent"
+          - - "powershell.exe wget c:\cloud.zip https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/AmazonCloudWatchAgent.zip"
+            - "powershell.exe expand-archive c:\cloud.zip c:\amazonAgent"
             - "powershell.exe c:\amazonAgent\install.ps1"
-            - '         --stack ' 
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
