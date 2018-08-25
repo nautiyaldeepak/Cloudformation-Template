@@ -75,6 +75,8 @@ Resources:
           - - "powershell.exe wget c:\cloud.zip https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/AmazonCloudWatchAgent.zip"
             - "powershell.exe expand-archive c:\cloud.zip c:\amazonAgent"
             - "powershell.exe c:\amazonAgent\install.ps1"
+            - "powershell.exe wget c:\'Program Files'\aws\amazon-cloud-watch\\config.json https://github.com/nautiyaldeepak/Cloudformation-Template/blob/master/CloudWatch/config.json"
+            - "amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c file:'c:\\Program Files\\aws\\amazon-cloudwatch-agent\\config.json' -s"
   MySecurityGroupEgress:
     Type: AWS::EC2::SecurityGroup
     Properties:
