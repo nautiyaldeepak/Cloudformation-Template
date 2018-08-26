@@ -26,6 +26,16 @@ Parameters:
       - m3.2xlarge
       - c1.medium
       - c1.xlarge
+  OperatingSystem:
+    Description: Select Operating System (Linux)
+    Type: String
+    Default: AmazonLinux
+    AllowedValues:
+      - AmazonLinux
+      - AmazonLinux2
+      - CentOS
+      - RHEL7
+      - RHEL6
   InstanceName:
     Description: Name of the Instance
     Type: String
